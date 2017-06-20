@@ -15,7 +15,7 @@ class Account:
         return 'Account({!r}, {!r})'.format(self.owner, self.amount)
 
     def __str__(self):
-        return 'Account of {} with balance: {}'.format(self.owner, self.amount)
+        return 'Account of {} with starting amount: {}'.format(self.owner, self.amount)
 
     def add_transaction(self, amount):
         if not isinstance(amount, int):

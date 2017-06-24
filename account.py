@@ -15,7 +15,8 @@ class Account:
         return 'Account({!r}, {!r})'.format(self.owner, self.amount)
 
     def __str__(self):
-        return 'Account of {} with starting amount: {}'.format(self.owner, self.amount)
+        return 'Account of {} with starting amount: {}'.format(self.owner,
+                                                               self.amount)
 
     def add_transaction(self, amount):
         if not isinstance(amount, int):
@@ -33,7 +34,7 @@ class Account:
         return self._transactions[position]
 
     def __reversed__(self):
-        return sorted(self, reverse=True)
+        return self[::-1]
 
     def __eq__(self, other):
         return self.balance == other.balance
@@ -69,3 +70,14 @@ class Account:
             print('transaction resulted in {} ({})'.format(exc_type.__name__, exc_val))  # noqa E501
         else:
             print('transaction ok')
+
+
+if __name__ == '__main__':
+    acc = Account('bob', 10)
+    acc.add_transaction(20)
+    acc.add_transaction(-10)
+    acc.add_transaction(50)
+    acc.add_transaction(-20)
+    acc.add_transaction(30)
+    assert acc.balance == 80
+    assert list(reversed(acc)) == [30, -20, 50, -10, 20]
